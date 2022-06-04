@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import express, { Application, Request, Response } from 'express'
+import express, { Application, Request, Response, NextFunction } from 'express'
 import { config } from 'dotenv'
 import cors from 'cors'
 import helmet from 'helmet'
@@ -15,7 +15,7 @@ app.use(cors())
 app.use(helmet())
 app.use(AppRouter)
 
-app.use((err: any, req: Request, res: Response) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 	res.status(err.status || 500).json({
 		status: 'error',
 		statusCode: err.status,
